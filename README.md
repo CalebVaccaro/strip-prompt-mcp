@@ -91,58 +91,78 @@ Negations (`not`, `no`, `never`), question words (`what`, `how`, `why`, `which`)
 
 ## Cost savings at scale
 
-Validated against real prompt and Jira ticket samples. Compression consistently delivers **~37% word reduction** regardless of input length or provider.
+> **These numbers are estimates, not guarantees.** Reduction varies by input type, writing style, and domain vocabulary. Run `python test_compression.py` to benchmark against your own scenarios and get a validated average for your workload.
 
-Baseline: average Jira ticket = 249 words → 156 words after compression (332 → 208 tokens).
+The figures below use the **validated average from `test_compression.py`** across 10 representative scenarios (short prompts, Jira tickets, PM stories, support requests, docs, meeting notes):
+
+```
+Scenario                               Word reduction   Char reduction
+─────────────────────────────────────────────────────────────────────
+Short casual prompt                         42.9%           27.1%
+Developer freeform question                 45.8%           30.2%
+Jira bug report                             37.3%           22.6%
+Jira feature request                        51.4%           35.7%
+Jira task / technical ticket                43.0%           28.3%
+Agile / PM style story                      52.9%           37.6%
+Customer support request                    51.6%           40.0%
+Technical documentation excerpt             40.0%           24.2%
+Meeting notes / async update                51.4%           36.7%
+Slack-style developer message               53.3%           40.3%
+─────────────────────────────────────────────────────────────────────
+Average                                     47.0%           32.3%
+```
+
+Baseline for tables: 332 input tokens/ticket, **47% word reduction → 156 tokens saved per call**.
 
 ### Claude Sonnet 4.6 — $3/M input tokens
 
 | Scale | Tickets/day | Original/mo | Saved/mo | After/mo | Saved/yr |
 |---|---|---|---|---|---|
-| Small team (20 devs) | 50 | $1.49 | $0.56 | $0.93 | $6.72 |
-| Mid-size (200 devs) | 500 | $14.94 | $5.57 | $9.37 | $66.84 |
-| Large (2K devs) | 5,000 | $149 | $55.60 | $93.40 | $667 |
-| Large (10K devs) | 25,000 | $747 | $278 | $469 | $3,336 |
-| SaaS (1K customers) | 100,000 | $2,988 | $1,115 | $1,873 | $13,380 |
-| SaaS (10K customers) | 1,000,000 | $29,880 | $11,148 | $18,732 | **$133,776** |
+| Small team (20 devs) | 50 | $1.49 | $0.70 | $0.79 | $8.40 |
+| Mid-size (200 devs) | 500 | $14.94 | $7.02 | $7.92 | $84.24 |
+| Large (2K devs) | 5,000 | $149 | $70.20 | $79 | $842 |
+| Large (10K devs) | 25,000 | $747 | $351 | $396 | $4,212 |
+| SaaS (1K customers) | 100,000 | $2,988 | $1,404 | $1,584 | $16,848 |
+| SaaS (10K customers) | 1,000,000 | $29,880 | $14,040 | $15,840 | **$168,480** |
 
 ### GPT-5.4 — $2.50/M input tokens
 
 | Scale | Tickets/day | Original/mo | Saved/mo | After/mo | Saved/yr |
 |---|---|---|---|---|---|
-| Small team (20 devs) | 50 | $1.24 | $0.46 | $0.78 | $5.52 |
-| Mid-size (200 devs) | 500 | $12.45 | $4.64 | $7.81 | $55.68 |
-| Large (2K devs) | 5,000 | $124.50 | $46.44 | $78.06 | $557 |
-| Large (10K devs) | 25,000 | $622 | $232 | $390 | $2,784 |
-| SaaS (1K customers) | 100,000 | $2,490 | $929 | $1,561 | $11,148 |
-| SaaS (10K customers) | 1,000,000 | $24,900 | $9,288 | $15,612 | **$111,456** |
+| Small team (20 devs) | 50 | $1.24 | $0.59 | $0.65 | $7.02 |
+| Mid-size (200 devs) | 500 | $12.45 | $5.85 | $6.60 | $70.20 |
+| Large (2K devs) | 5,000 | $124 | $58.50 | $66 | $702 |
+| Large (10K devs) | 25,000 | $622 | $292 | $330 | $3,510 |
+| SaaS (1K customers) | 100,000 | $2,490 | $1,170 | $1,320 | $14,040 |
+| SaaS (10K customers) | 1,000,000 | $24,900 | $11,700 | $13,200 | **$140,400** |
 
 ### Claude Haiku 4.5 — $1/M input tokens
 
 | Scale | Tickets/day | Original/mo | Saved/mo | After/mo | Saved/yr |
 |---|---|---|---|---|---|
-| Small team (20 devs) | 50 | $0.50 | $0.19 | $0.31 | $2.28 |
-| Mid-size (200 devs) | 500 | $4.98 | $1.86 | $3.12 | $22.32 |
-| Large (2K devs) | 5,000 | $49.80 | $18.58 | $31.22 | $222.96 |
-| Large (10K devs) | 25,000 | $249 | $92.90 | $156.10 | $1,115 |
-| SaaS (1K customers) | 100,000 | $996 | $372 | $624 | $4,464 |
-| SaaS (10K customers) | 1,000,000 | $9,960 | $3,716 | $6,244 | **$44,592** |
+| Small team (20 devs) | 50 | $0.50 | $0.23 | $0.27 | $2.81 |
+| Mid-size (200 devs) | 500 | $4.98 | $2.34 | $2.64 | $28.08 |
+| Large (2K devs) | 5,000 | $49.80 | $23.40 | $26.40 | $280.80 |
+| Large (10K devs) | 25,000 | $249 | $117 | $132 | $1,404 |
+| SaaS (1K customers) | 100,000 | $996 | $468 | $528 | $5,616 |
+| SaaS (10K customers) | 1,000,000 | $9,960 | $4,680 | $5,280 | **$56,160** |
 
 ### GPT-5.4-mini — $0.75/M input tokens
 
 | Scale | Tickets/day | Original/mo | Saved/mo | After/mo | Saved/yr |
 |---|---|---|---|---|---|
-| Small team (20 devs) | 50 | $0.37 | $0.14 | $0.23 | $1.68 |
-| Mid-size (200 devs) | 500 | $3.74 | $1.39 | $2.35 | $16.68 |
-| Large (2K devs) | 5,000 | $37.35 | $13.94 | $23.41 | $167.28 |
-| Large (10K devs) | 25,000 | $187 | $69.70 | $117.30 | $836.40 |
-| SaaS (1K customers) | 100,000 | $747 | $278.70 | $468.30 | $3,344 |
-| SaaS (10K customers) | 1,000,000 | $7,470 | $2,786 | $4,684 | **$33,432** |
+| Small team (20 devs) | 50 | $0.37 | $0.18 | $0.19 | $2.11 |
+| Mid-size (200 devs) | 500 | $3.74 | $1.76 | $1.98 | $21.06 |
+| Large (2K devs) | 5,000 | $37.35 | $17.55 | $19.80 | $210.60 |
+| Large (10K devs) | 25,000 | $187 | $87.75 | $99.25 | $1,053 |
+| SaaS (1K customers) | 100,000 | $747 | $351 | $396 | $4,212 |
+| SaaS (10K customers) | 1,000,000 | $7,470 | $3,510 | $3,960 | **$42,120** |
 
 ### Notes
 
 - Savings apply to **input tokens only** — output tokens are unaffected
-- The 37% reduction holds consistently across prompt types (tickets, freeform, instructions)
+- Reduction varies: formal/verbose text (PM stories, support tickets) compresses ~50%+; technical docs and bug reports compress ~37–43%
 - Compression is provider-agnostic — same gain regardless of which model you use
-- For pipelines ingesting comments, changelogs, or sprint context, savings multiply further
+- For pipelines ingesting comments, changelogs, or sprint context alongside tickets, savings multiply further
 - Cursor users on flat subscriptions see no direct cost reduction — the win there is context window efficiency
+- Run `python test_compression.py` to validate against your own workload before sizing the savings
