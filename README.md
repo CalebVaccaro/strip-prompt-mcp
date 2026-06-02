@@ -114,7 +114,9 @@ Average                                     47.0%           32.3%
 
 Baseline for tables: 332 input tokens/ticket, **47% word reduction → 156 tokens saved per call**.
 
-### Claude Sonnet 4.6 — $3/M input tokens
+Pricing sourced June 2026. Check provider pages for current rates before relying on these figures.
+
+### Claude Sonnet 4.6 — $3/M input tokens *(as of June 2026)*
 
 | Scale | Tickets/day | Original/mo | Saved/mo | After/mo | Saved/yr |
 |---|---|---|---|---|---|
@@ -125,7 +127,7 @@ Baseline for tables: 332 input tokens/ticket, **47% word reduction → 156 token
 | SaaS (1K customers) | 100,000 | $2,988 | $1,404 | $1,584 | $16,848 |
 | SaaS (10K customers) | 1,000,000 | $29,880 | $14,040 | $15,840 | **$168,480** |
 
-### GPT-5.4 — $2.50/M input tokens
+### GPT-5.4 — $2.50/M input tokens *(as of June 2026)*
 
 | Scale | Tickets/day | Original/mo | Saved/mo | After/mo | Saved/yr |
 |---|---|---|---|---|---|
@@ -136,7 +138,7 @@ Baseline for tables: 332 input tokens/ticket, **47% word reduction → 156 token
 | SaaS (1K customers) | 100,000 | $2,490 | $1,170 | $1,320 | $14,040 |
 | SaaS (10K customers) | 1,000,000 | $24,900 | $11,700 | $13,200 | **$140,400** |
 
-### Claude Haiku 4.5 — $1/M input tokens
+### Claude Haiku 4.5 — $1/M input tokens *(as of June 2026)*
 
 | Scale | Tickets/day | Original/mo | Saved/mo | After/mo | Saved/yr |
 |---|---|---|---|---|---|
@@ -147,7 +149,7 @@ Baseline for tables: 332 input tokens/ticket, **47% word reduction → 156 token
 | SaaS (1K customers) | 100,000 | $996 | $468 | $528 | $5,616 |
 | SaaS (10K customers) | 1,000,000 | $9,960 | $4,680 | $5,280 | **$56,160** |
 
-### GPT-5.4-mini — $0.75/M input tokens
+### GPT-5.4-mini — $0.75/M input tokens *(as of June 2026)*
 
 | Scale | Tickets/day | Original/mo | Saved/mo | After/mo | Saved/yr |
 |---|---|---|---|---|---|
