@@ -7,8 +7,16 @@ MCP server that strips stop words and filler from English text to reduce token c
 ```bash
 git clone https://github.com/CalebVaccaro/strip-prompt-mcp
 cd strip-prompt-mcp
-pip install -r requirements.txt
+python3 -m venv .venv
+. .venv/bin/activate
+python -m pip install -r requirements.txt
 python3 -c "import nltk; nltk.download('stopwords')"
+```
+
+Quick local smoke test:
+
+```bash
+python server.py --compress "Please summarize the existing implementation and identify risks."
 ```
 
 ## Option A — Auto-strip every prompt (hook)
@@ -28,21 +36,29 @@ To remove it, delete the hook entry from `~/.claude/settings.json`.
 Add the server to your Claude workspace and call `compress_text` manually or let the agent call it when it needs to compress content.
 
 ```bash
-claude mcp add strip-prompt -- python3 /path/to/strip-prompt-mcp/server.py
+claude mcp add strip-prompt -- /absolute/path/to/strip-prompt-mcp/.venv/bin/python /absolute/path/to/strip-prompt-mcp/server.py
 ```
 
-Or add manually to `.claude/settings.json`:
+For this local checkout, the command would look like:
+
+```bash
+claude mcp add strip-prompt -- "$PWD/.venv/bin/python" "$PWD/server.py"
+```
+
+Or add manually to a repo or workspace MCP config:
 
 ```json
 {
   "mcpServers": {
     "strip-prompt": {
-      "command": "python3",
-      "args": ["/path/to/strip-prompt-mcp/server.py"]
+      "command": "/absolute/path/to/strip-prompt-mcp/.venv/bin/python",
+      "args": ["/absolute/path/to/strip-prompt-mcp/server.py"]
     }
   }
 }
 ```
+
+The MCP server can live outside the repo where it is used. The only requirement is that the `command` points to a Python environment with `requirements.txt` installed, and `args[0]` points to this repository's `server.py`.
 
 Both options can be active at the same time.
 
