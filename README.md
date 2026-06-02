@@ -140,6 +140,17 @@ Standard pricing. Batch pricing is 50% off ($0.875/M) for async pipelines.
 | SaaS (1K customers) | 100,000 | $1,743 | $819 | $924 | $9,828 |
 | SaaS (10K customers) | 1,000,000 | $17,430 | $8,190 | $9,240 | **$98,280** |
 
+### GPT-5.5 — $5/M input tokens *(as of June 2026)*
+
+| Scale | Tickets/day | Original/mo | Saved/mo | After/mo | Saved/yr |
+|---|---|---|---|---|---|
+| Small team (20 devs) | 50 | $2.49 | $1.17 | $1.32 | $14.04 |
+| Mid-size (200 devs) | 500 | $24.90 | $11.70 | $13.20 | $140.40 |
+| Large (2K devs) | 5,000 | $249 | $117 | $132 | $1,404 |
+| Large (10K devs) | 25,000 | $1,245 | $585 | $660 | $7,020 |
+| SaaS (1K customers) | 100,000 | $4,980 | $2,340 | $2,640 | $28,080 |
+| SaaS (10K customers) | 1,000,000 | $49,800 | $23,400 | $26,400 | **$280,800** |
+
 ### Claude Haiku 4.5 — $1/M input tokens *(as of June 2026)*
 
 | Scale | Tickets/day | Original/mo | Saved/mo | After/mo | Saved/yr |
