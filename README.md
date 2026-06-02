@@ -127,16 +127,18 @@ Pricing sourced June 2026. Check provider pages for current rates before relying
 | SaaS (1K customers) | 100,000 | $2,988 | $1,404 | $1,584 | $16,848 |
 | SaaS (10K customers) | 1,000,000 | $29,880 | $14,040 | $15,840 | **$168,480** |
 
-### GPT-5.4 — $2.50/M input tokens *(as of June 2026)*
+### gpt-5.3-codex — $1.75/M input tokens *(as of June 2026)*
+
+Standard pricing. Batch pricing is 50% off ($0.875/M) for async pipelines.
 
 | Scale | Tickets/day | Original/mo | Saved/mo | After/mo | Saved/yr |
 |---|---|---|---|---|---|
-| Small team (20 devs) | 50 | $1.24 | $0.59 | $0.65 | $7.02 |
-| Mid-size (200 devs) | 500 | $12.45 | $5.85 | $6.60 | $70.20 |
-| Large (2K devs) | 5,000 | $124 | $58.50 | $66 | $702 |
-| Large (10K devs) | 25,000 | $622 | $292 | $330 | $3,510 |
-| SaaS (1K customers) | 100,000 | $2,490 | $1,170 | $1,320 | $14,040 |
-| SaaS (10K customers) | 1,000,000 | $24,900 | $11,700 | $13,200 | **$140,400** |
+| Small team (20 devs) | 50 | $0.87 | $0.41 | $0.46 | $4.92 |
+| Mid-size (200 devs) | 500 | $8.72 | $4.10 | $4.62 | $49.20 |
+| Large (2K devs) | 5,000 | $87.15 | $40.95 | $46.20 | $491 |
+| Large (10K devs) | 25,000 | $435.75 | $204.75 | $231 | $2,457 |
+| SaaS (1K customers) | 100,000 | $1,743 | $819 | $924 | $9,828 |
+| SaaS (10K customers) | 1,000,000 | $17,430 | $8,190 | $9,240 | **$98,280** |
 
 ### Claude Haiku 4.5 — $1/M input tokens *(as of June 2026)*
 
@@ -148,17 +150,6 @@ Pricing sourced June 2026. Check provider pages for current rates before relying
 | Large (10K devs) | 25,000 | $249 | $117 | $132 | $1,404 |
 | SaaS (1K customers) | 100,000 | $996 | $468 | $528 | $5,616 |
 | SaaS (10K customers) | 1,000,000 | $9,960 | $4,680 | $5,280 | **$56,160** |
-
-### GPT-5.4-mini — $0.75/M input tokens *(as of June 2026)*
-
-| Scale | Tickets/day | Original/mo | Saved/mo | After/mo | Saved/yr |
-|---|---|---|---|---|---|
-| Small team (20 devs) | 50 | $0.37 | $0.18 | $0.19 | $2.11 |
-| Mid-size (200 devs) | 500 | $3.74 | $1.76 | $1.98 | $21.06 |
-| Large (2K devs) | 5,000 | $37.35 | $17.55 | $19.80 | $210.60 |
-| Large (10K devs) | 25,000 | $187 | $87.75 | $99.25 | $1,053 |
-| SaaS (1K customers) | 100,000 | $747 | $351 | $396 | $4,212 |
-| SaaS (10K customers) | 1,000,000 | $7,470 | $3,510 | $3,960 | **$42,120** |
 
 ### Notes
 
