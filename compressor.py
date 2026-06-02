@@ -184,7 +184,79 @@ def _post_pass(text: str) -> str:
     return re.sub(r'  +', ' ', text).strip()
 
 
+def _is_table_row(line: str) -> bool:
+    s = line.strip()
+    return s.startswith('|') and s.endswith('|') and len(s) > 1
+
+
+def _parse_cells(row: str) -> list[str]:
+    inner = row.strip().lstrip('|').rstrip('|')
+    return [c.strip() for c in inner.split('|')]
+
+
+def _is_separator(cells: list[str]) -> bool:
+    return bool(cells) and all(re.match(r'^[-:]+$', c) for c in cells)
+
+
+def _format_row(cells: list[str]) -> str:
+    non_empty = [c for c in cells if c]
+    if not non_empty:
+        return ''
+    if len(non_empty) == 1:
+        return non_empty[0]
+    if len(non_empty) == 2:
+        return non_empty[0] + ': ' + non_empty[1]
+    return non_empty[0] + ': ' + non_empty[1] + ' (' + ', '.join(non_empty[2:]) + ')'
+
+
+def _table_pass(text: str) -> str:
+    def _flush(buf):
+        out = []
+        header_seen = False
+        for raw in buf:
+            cells = _parse_cells(raw)
+            if _is_separator(cells):
+                continue
+            if not header_seen:
+                header_seen = True
+                continue  # drop header row
+            row_out = _format_row(cells)
+            if row_out:
+                out.append(row_out)
+        return out
+
+    lines = text.split('\n')
+    result = []
+    table_buf = []
+    in_code = False
+
+    for line in lines:
+        if line.strip().startswith('```'):
+            in_code = not in_code
+            if table_buf:
+                result.extend(_flush(table_buf))
+                table_buf = []
+            result.append(line)
+            continue
+        if in_code:
+            result.append(line)
+            continue
+        if _is_table_row(line):
+            table_buf.append(line)
+        else:
+            if table_buf:
+                result.extend(_flush(table_buf))
+                table_buf = []
+            result.append(line)
+
+    if table_buf:
+        result.extend(_flush(table_buf))
+
+    return '\n'.join(result)
+
+
 def compress(text: str) -> str:
+    text = _table_pass(text)
     text = _pre_pass(text)
     text = _stop_pass(text)
     text = _post_pass(text)
