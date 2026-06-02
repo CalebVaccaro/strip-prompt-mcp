@@ -19,6 +19,21 @@ Quick local smoke test:
 python server.py --compress "Please summarize the existing implementation and identify risks."
 ```
 
+Optional flags (not active by default):
+
+```bash
+# Show the compressed context that will be sent to the model
+echo "your prompt here" | strip-prompt --context
+
+# Show word reduction percentage
+echo "your prompt here" | strip-prompt --reduction
+
+# Show both
+echo "your prompt here" | strip-prompt --context --reduction
+```
+
+These flags are informational — useful for inspecting what gets sent to the model before inference.
+
 ## Option A — Auto-strip every prompt (hook)
 
 Runs the compressor locally before Claude ever sees your prompt. Zero inference cost on the filler.
@@ -86,6 +101,8 @@ Output (20 words, 39% reduction):
 - Filler: `basically`, `essentially`, `literally`, `potentially`, `possibly`, `hi`, `thanks`, `please`
 
 ## What's kept
+
+**CONTEXT** — simply strip fluff and keep core context.
 
 Negations (`not`, `no`, `never`), question words (`what`, `how`, `why`, `which`), comparatives (`more`, `less`, `most`), and all domain-specific nouns, verbs, and technical terms.
 

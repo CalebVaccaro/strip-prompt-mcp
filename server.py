@@ -71,9 +71,28 @@ async def main():
         await server.run(read_stream, write_stream, server.create_initialization_options())
 
 
+def _stats(orig: str, comp: str):
+    ow, cw = len(orig.split()), len(comp.split())
+    pct = round((ow - cw) / ow * 100) if ow else 0
+    return ow, cw, pct
+
+
 if __name__ == "__main__":
-    if len(sys.argv) > 2 and sys.argv[1] == "--compress":
-        print(compress_with_stats(" ".join(sys.argv[2:])))
+    args = set(sys.argv[1:])
+
+    if "--compress" in args:
+        text = " ".join(a for a in sys.argv[2:] if not a.startswith("--"))
+        compressed = compress(text)
+        show_context = "--context" in args
+        show_reduction = "--reduction" in args
+
+        if show_context:
+            print(f"CONTEXT:\n{compressed}")
+        if show_reduction:
+            ow, cw, pct = _stats(text, compressed)
+            print(f"REDUCTION: {pct}% word reduction ({ow} → {cw} words)")
+        if not show_context and not show_reduction:
+            print(compress_with_stats(text))
         sys.exit(0)
 
     asyncio.run(main())
